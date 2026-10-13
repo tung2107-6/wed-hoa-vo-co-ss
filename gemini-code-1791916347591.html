@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tài Liệu Học Tập</title>
+  <style>
+    /* 1. RESET & CẤU TRÚC CHUNG */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    body {
+      display: flex;
+      background-color: #f8fafc;
+      color: #334155;
+      min-height: 100vh;
+    }
+
+    /* 2. SIDEBAR BÊN TRÁI */
+    .sidebar {
+      width: 260px;
+      background-color: #ffffff;
+      border-right: 1px solid #e2e8f0;
+      padding: 24px 16px;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      overflow-y: auto;
+    }
+    .sidebar h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 20px;
+      padding-left: 8px;
+    }
+    .sidebar ul {
+      list-style: none;
+    }
+    .sidebar li {
+      margin-bottom: 6px;
+    }
+    .sidebar a {
+      display: block;
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+    .sidebar a:hover {
+      background-color: #f1f5f9;
+      color: #0f172a;
+    }
+    .sidebar a.active {
+      background-color: #2563eb;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* 3. VÙNG HIỂN THỊ NỘI DUNG */
+    .main-content {
+      margin-left: 260px;
+      flex: 1;
+      padding: 40px 48px;
+      max-width: 900px;
+    }
+    .chapter-content {
+      display: none; /* Mặc định ẩn tất cả các chương */
+      animation: fadeIn 0.25s ease;
+    }
+    .chapter-content.active {
+      display: block; /* Chỉ hiện chương đang chọn */
+    }
+    .chapter-content h1 {
+      font-size: 1.8rem;
+      color: #0f172a;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 10px;
+    }
+    .chapter-content p {
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR: Danh mục các chương -->
+  <aside class="sidebar">
+    <h2>Mục Lục</h2>
+    <ul>
+      <li><a href="#chuong-1" class="menu-link active" onclick="switchChapter('chuong-1', this)">Chương 1: Mở đầu</a></li>
+      <li><a href="#chuong-2" class="menu-link" onclick="switchChapter('chuong-2', this)">Chương 2: Cơ sở lý thuyết</a></li>
+      <li><a href="#chuong-3" class="menu-link" onclick="switchChapter('chuong-3', this)">Chương 3: Thực nghiệm & Đánh giá</a></li>
+      <!-- Thêm chương mới: Copy thêm thẻ <li> ở đây -->
+    </ul>
+  </aside>
+
+  <!-- MAIN CONTENT: Nơi nạp nội dung chi tiết -->
+  <main class="main-content">
+    
+    <!-- Nội dung Chương 1 -->
+    <section id="chuong-1" class="chapter-content active">
+      <h1>Chương 1: Mở đầu</h1>
+      <p>Nạp nội dung đoạn văn, ghi chú hoặc bài học của Chương 1 vào đây...</p>
+    </section>
+
+    <!-- Nội dung Chương 2 -->
+    <section id="chuong-2" class="chapter-content">
+      <h1>Chương 2: Cơ sở lý thuyết</h1>
+      <p>Nạp nội dung kiến thức, công thức hoặc hình ảnh của Chương 2 vào đây...</p>
+    </section>
+
+    <!-- Nội dung Chương 3 -->
+    <section id="chuong-3" class="chapter-content">
+      <h1>Chương 3: Thực nghiệm & Đánh giá</h1>
+      <p>Nạp nội dung báo cáo, bảng số liệu của Chương 3 vào đây...</p>
+    </section>
+
+  </main>
+
+  <!-- JAVASCRIPT: Xử lý ẩn/hiện nội dung khi bấm menu -->
+  <script>
+    function switchChapter(targetId, clickedElement) {
+      // Ẩn tất cả các chương
+      document.querySelectorAll('.chapter-content').forEach(section => {
+        section.classList.remove('active');
+      });
+
+      // Bỏ trạng thái kích hoạt trên sidebar
+      document.querySelectorAll('.menu-link').forEach(link => {
+        link.classList.remove('active');
+      });
+
+      // Kích hoạt chương và nút vừa chọn
+      document.getElementById(targetId).classList.add('active');
+      clickedElement.classList.add('active');
+    }
+  </script>
+</body>
+</html>
